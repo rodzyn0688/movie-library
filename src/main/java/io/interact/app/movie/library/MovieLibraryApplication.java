@@ -4,15 +4,26 @@ import io.dropwizard.Application;
 import io.dropwizard.configuration.EnvironmentVariableSubstitutor;
 import io.dropwizard.configuration.SubstitutingSourceProvider;
 import io.dropwizard.db.DataSourceFactory;
+import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.migrations.MigrationsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import io.interact.app.movie.library.core.model.Movie;
+import io.interact.app.movie.library.core.model.Person;
 
 public class MovieLibraryApplication extends Application<MovieLibraryConfiguration> {
 
     public static void main(final String[] args) throws Exception {
         new MovieLibraryApplication().run(args);
     }
+
+    private final HibernateBundle<MovieLibraryConfiguration> hibernateBundle =
+            new HibernateBundle<MovieLibraryConfiguration>(Movie.class, Person.class) {
+                @Override
+                public DataSourceFactory getDataSourceFactory(MovieLibraryConfiguration configuration) {
+                    return configuration.getDataSourceFactory();
+                }
+            };
 
     @Override
     public String getName() {
@@ -35,6 +46,7 @@ public class MovieLibraryApplication extends Application<MovieLibraryConfigurati
                 return configuration.getDataSourceFactory();
             }
         });
+        bootstrap.addBundle(hibernateBundle);
     }
 
     @Override
