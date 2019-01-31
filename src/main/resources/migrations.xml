@@ -1,0 +1,104 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <changeSet author="marcin (generated)" id="1548981644794-1">
+        <createTable catalogName="MOVIE-LIBRARY" schemaName="PUBLIC" tableName="MOVIE">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="CONSTRAINT_4"/>
+            </column>
+            <column name="CREATED" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LAST_MODIFIED" type="TIMESTAMP"/>
+            <column name="DESCRIPTION" type="VARCHAR(255)"/>
+            <column name="DURATION" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RELEASEYEAR" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TITLE" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="marcin (generated)" id="1548981644794-2">
+        <createTable catalogName="MOVIE-LIBRARY" schemaName="PUBLIC" tableName="MOVIE_ACTOR">
+            <column name="MOVIE_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ACTOR_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="marcin (generated)" id="1548981644794-3">
+        <createTable catalogName="MOVIE-LIBRARY" schemaName="PUBLIC" tableName="PERSON">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="CONSTRAINT_8"/>
+            </column>
+            <column name="CREATED" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LAST_MODIFIED" type="TIMESTAMP"/>
+            <column name="BORN" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CURRENTNATIONALITY" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DESCRIPTION" type="VARCHAR(255)"/>
+            <column name="FIRSTNAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LASTNAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="marcin (generated)" id="1548981644794-4">
+        <createIndex catalogName="MOVIE-LIBRARY" indexName="FK84O19M70MNIRPU8WIK1TMYUDC_INDEX_8" schemaName="PUBLIC" tableName="MOVIE_ACTOR">
+            <column name="ACTOR_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="marcin (generated)" id="1548981644794-5">
+        <createIndex catalogName="MOVIE-LIBRARY" indexName="FKI17Y5929B8LHMTAY3G1WO76E2_INDEX_8" schemaName="PUBLIC" tableName="MOVIE_ACTOR">
+            <column name="MOVIE_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="marcin (generated)" id="1548981644794-6">
+        <createIndex catalogName="MOVIE-LIBRARY" indexName="IDX2YXGW0YNTFBP16PKB7A8WVIAF" schemaName="PUBLIC" tableName="MOVIE">
+            <column name="RELEASEYEAR"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="marcin (generated)" id="1548981644794-7">
+        <createIndex catalogName="MOVIE-LIBRARY" indexName="IDX5RO66TBBCTNKK94Y2BTQFT1WD" schemaName="PUBLIC" tableName="PERSON">
+            <column name="BORN"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="marcin (generated)" id="1548981644794-8">
+        <createIndex catalogName="MOVIE-LIBRARY" indexName="IDX7S235YK4SMFPIEEGBIARM0RG2" schemaName="PUBLIC" tableName="PERSON">
+            <column name="LASTNAME"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="marcin (generated)" id="1548981644794-9">
+        <createIndex catalogName="MOVIE-LIBRARY" indexName="IDX90WESXXDAABHULSERYWCM92WD" schemaName="PUBLIC" tableName="PERSON">
+            <column name="FIRSTNAME"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="marcin (generated)" id="1548981644794-10">
+        <createIndex catalogName="MOVIE-LIBRARY" indexName="IDXAFXSHCIO0RQ41XWNCHTAEQ6BL" schemaName="PUBLIC" tableName="MOVIE">
+            <column name="DURATION"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="marcin (generated)" id="1548981644794-11">
+        <createIndex catalogName="MOVIE-LIBRARY" indexName="IDXS9ECOVRYB6E6XO86RH5DDJIYI" schemaName="PUBLIC" tableName="MOVIE">
+            <column name="TITLE"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="marcin (generated)" id="1548981644794-12">
+        <addForeignKeyConstraint baseColumnNames="ACTOR_ID" baseTableCatalogName="MOVIE-LIBRARY" baseTableName="MOVIE_ACTOR" baseTableSchemaName="PUBLIC" constraintName="FK84O19M70MNIRPU8WIK1TMYUDC" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableCatalogName="MOVIE-LIBRARY" referencedTableName="PERSON" referencedTableSchemaName="PUBLIC" validate="true"/>
+    </changeSet>
+    <changeSet author="marcin (generated)" id="1548981644794-13">
+        <addForeignKeyConstraint baseColumnNames="MOVIE_ID" baseTableCatalogName="MOVIE-LIBRARY" baseTableName="MOVIE_ACTOR" baseTableSchemaName="PUBLIC" constraintName="FKI17Y5929B8LHMTAY3G1WO76E2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableCatalogName="MOVIE-LIBRARY" referencedTableName="MOVIE" referencedTableSchemaName="PUBLIC" validate="true"/>
+    </changeSet>
+</databaseChangeLog>

@@ -6,10 +6,7 @@ import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 import static org.hibernate.annotations.CascadeType.SAVE_UPDATE;
 
@@ -17,6 +14,13 @@ import static org.hibernate.annotations.CascadeType.SAVE_UPDATE;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(indexes = {@Index(columnList = "firstName"), @Index(columnList = "lastName"), @Index(columnList = "born")})
+@NamedQueries(
+        {
+                @NamedQuery(
+                        name = "io.interact.app.movie.library.core.model.Person.findByFirstNameAndLastNameAndBornAndCurrentNationality",
+                        query = "SELECT p FROM Person p WHERE p.firstName = :firstName AND p.lastName = :lastName AND p.born = :born AND p.currentNationality = :currentNationality"
+                ),
+        })
 public class Person extends BasicAbstractEntity {
 
     @NotNull
@@ -31,6 +35,7 @@ public class Person extends BasicAbstractEntity {
     private String description;
 
     @NotNull
+    @EqualsAndHashCode.Exclude
     @Cascade({SAVE_UPDATE})
     @ManyToMany(mappedBy = "actors")
     private List<Movie> moviesAsActor = new ArrayList<>();

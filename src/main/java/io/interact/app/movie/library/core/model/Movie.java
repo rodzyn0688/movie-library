@@ -18,6 +18,17 @@ import static org.hibernate.annotations.CascadeType.SAVE_UPDATE;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(indexes = {@Index(columnList = "title"), @Index(columnList = "releaseYear"), @Index(columnList = "duration")})
+@NamedQueries(
+        {
+                @NamedQuery(
+                        name = "io.interact.app.movie.library.core.model.Movie.findAll",
+                        query = "SELECT m FROM Movie m"
+                ),
+                @NamedQuery(
+                        name = "io.interact.app.movie.library.core.model.Movie.findByTitleAndReleaseYearAndDuration",
+                        query = "SELECT m FROM Movie m WHERE m.title = :title AND m.releaseYear = :releaseYear AND m.duration = :duration"
+                ),
+        })
 public class Movie extends BasicAbstractEntity {
 
     @NotNull
@@ -31,11 +42,13 @@ public class Movie extends BasicAbstractEntity {
     private String description;
 
     @NotNull
+    @EqualsAndHashCode.Exclude
     @Cascade({SAVE_UPDATE})
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "movie_actor",
             joinColumns = {@JoinColumn(name = "movie_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "actor_id", referencedColumnName = "id")})
     private List<Person> actors = new ArrayList<>();
+
 }

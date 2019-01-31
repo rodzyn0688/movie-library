@@ -113,9 +113,9 @@ public class MovieUnitTest extends AbstractModelTest<Movie> {
                         new TestEqualFlow(this.createChangeClone(exampleMovieDescription2)),
                         Boolean.FALSE},
                 new Object[]{
-                        "shouldNotBeEqualByActors",
+                        "shouldBeEqualByActors",
                         new TestEqualFlow(this.createChangeClone(exampleMovieActors)),
-                        Boolean.FALSE
+                        Boolean.TRUE
                 },
                 new Object[]{
                         "shouldBeEqualWhenOnlyCloneIsPersist",

@@ -120,11 +120,6 @@ public class PersonUnitTest extends AbstractModelTest<Person> {
                         new TestEqualFlow(this.createChangeClone(examplePersonDescription2)),
                         Boolean.FALSE},
                 new Object[]{
-                        "shouldNotBeEqualByMovies",
-                        new TestEqualFlow(this.createChangeClone(examplePersonMovies)),
-                        Boolean.FALSE
-                },
-                new Object[]{
                         "shouldBeEqualWhenOnlyCloneIsPersist",
                         new TestEqualFlow(this.prepareMovieToBePersistWithId(null, 6L)),
                         Boolean.TRUE},

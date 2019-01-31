@@ -2,6 +2,7 @@ package io.interact.app.movie.library.core.model;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.joda.time.DateTime;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -46,5 +47,13 @@ public abstract class BasicAbstractEntity {
     @Override
     public int hashCode() {
         return Objects.hash(id, created, lastModified);
+    }
+
+    public DateTime getCreatedDateTime() {
+        return new DateTime(this.created.getTime());
+    }
+
+    public DateTime getLastModifyDateTime() {
+        return new DateTime(this.lastModified.getTime());
     }
 }
