@@ -8,8 +8,13 @@ import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.migrations.MigrationsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import io.interact.app.movie.library.api.MovieService;
 import io.interact.app.movie.library.core.model.Movie;
 import io.interact.app.movie.library.core.model.Person;
+import io.interact.app.movie.library.core.service.MovieServiceImpl;
+import io.interact.app.movie.library.db.MovieDAO;
+import io.interact.app.movie.library.resources.MovieResource;
+import lombok.val;
 
 public class MovieLibraryApplication extends Application<MovieLibraryConfiguration> {
 
@@ -52,7 +57,9 @@ public class MovieLibraryApplication extends Application<MovieLibraryConfigurati
     @Override
     public void run(final MovieLibraryConfiguration configuration,
                     final Environment environment) {
-        // TODO: implement application
+        val movieDao = new MovieDAO(hibernateBundle.getSessionFactory());
+        val movieService = new MovieServiceImpl(movieDao);
+        environment.jersey().register(new MovieResource(movieService));
     }
 
 }

@@ -3,6 +3,7 @@ package io.interact.app.movie.library.db;
 import io.dropwizard.hibernate.AbstractDAO;
 import io.interact.app.movie.library.core.model.Movie;
 import io.interact.app.movie.library.core.model.Person;
+import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Slf4j
 public class MovieDAO extends AbstractDAO<Movie> {
 
     /**
@@ -23,6 +25,7 @@ public class MovieDAO extends AbstractDAO<Movie> {
     }
 
     public Movie createOrUpdate(final Movie movie) {
+        log.debug("TEST LOGERA !!!!!!");
         if (movie.getId() == null) {
             val query = namedQuery("io.interact.app.movie.library.core.model.Movie.findByTitleAndReleaseYearAndDuration")
                     .setParameter("title", movie.getTitle())

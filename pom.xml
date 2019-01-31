@@ -24,6 +24,7 @@
         <org.mapstruct.version>1.2.0.Final</org.mapstruct.version>
         <lombok.version>1.18.4</lombok.version>
         <hibernate.version>5.4.2.Final</hibernate.version>
+        <okhttp.version>2.7.5</okhttp.version>
         <mainClass>io.interact.app.movie.library.MovieLibraryApplication</mainClass>
     </properties>
 
@@ -48,6 +49,12 @@
                 <groupId>org.mapstruct</groupId>
                 <artifactId>mapstruct-jdk8</artifactId>
                 <version>${org.mapstruct.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.squareup.okhttp</groupId>
+                <artifactId>okhttp</artifactId>
+                <version>${okhttp.version}</version>
             </dependency>
 
             <dependency>
@@ -82,6 +89,10 @@
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.okhttp</groupId>
+            <artifactId>okhttp</artifactId>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
