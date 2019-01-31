@@ -44,6 +44,10 @@ public abstract class BasicAbstractEntity {
         return true;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(id, created, lastModified);
